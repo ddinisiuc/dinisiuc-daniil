@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Phoenix - Creative Performer & Video Editor</title>
+    <meta name="description" content="Multi-talented performer specializing in dance, fire shows, video editing, and fight choreography. Available for casting and creative projects.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1b1b 50%, #1a1a1a 75%, #0f0f0f 100%);
+        }
+        
+        .fire-accent {
+            background: linear-gradient(45deg, #ff4500, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .photo-item {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #ff4500;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6b35;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-display text-xl font-bold fire-accent">Alex Phoenix</div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="hover:text-orange-400 transition-colors">About</a>
+                    <a href="#showreel" class="hover:text-orange-400 transition-colors">Showreel</a>
+                    <a href="#gallery" class="hover:text-orange-400 transition-colors">Gallery</a>
+                    <a href="#services" class="hover:text-orange-400 transition-colors">Services</a>
+                    <a href="#contact" class="hover:text-orange-400 transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-40 hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <a href="#about" class="hover:text-orange-400 transition-colors mobile-menu-link">About</a>
+            <a href="#showreel" class="hover:text-orange-400 transition-colors mobile-menu-link">Showreel</a>
+            <a href="#gallery" class="hover:text-orange-400 transition-colors mobile-menu-link">Gallery</a>
+            <a href="#services" class="hover:text-orange-400 transition-colors mobile-menu-link">Services</a>
+            <a href="#contact" class="hover:text-orange-400 transition-colors mobile-menu-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 section-fade">
+                Alex <span class="fire-accent">Phoenix</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 section-fade font-light">
+                🔥 Performer. Video Editor. I burn and create.
+            </p>
+            <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto section-fade text-gray-300">
+                Multi-talented creative artist bringing fire to the screen and stage through dynamic performances and cutting-edge video editing.
+            </p>
+            <div class="space-x-4 section-fade">
+                <a href="#showreel" class="bg-gradient-to-r from-orange-500 to-red-600 px-8 py-3 rounded-full font-semibold hover:from-orange-600 hover:to-red-700 transition-all hover-lift inline-block">
+                    Watch Showreel
+                </a>
+                <a href="#contact" class="border-2 border-orange-500 px-8 py-3 rounded-full font-semibold hover:bg-orange-500 transition-all hover-lift inline-block">
+                    Book Me
+                </a>
+            </div>
+        </div>
+        
+        <!-- Floating elements for visual interest -->
+        <div class="absolute top-20 left-10 w-4 h-4 bg-orange-500 rounded-full opacity-70 animate-pulse"></div>
+        <div class="absolute bottom-32 right-16 w-6 h-6 bg-red-500 rounded-full opacity-50 animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-2 h-2 bg-yellow-500 rounded-full opacity-60 animate-pulse" style="animation-delay: 2s;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-display text-4xl font-bold mb-12 section-fade">About <span class="fire-accent">Me</span></h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="section-fade">
+                        <p class="text-lg leading-relaxed mb-6">
+                            Born from a passion for movement and visual storytelling, I've spent years perfecting the art of performance while mastering the technical craft of video editing. My journey spans from underground dance battles to fire performances that light up the night, all while developing an eye for cinematic storytelling.
+                        </p>
+                        <p class="text-lg leading-relaxed mb-6">
+                            Whether I'm choreographing an intense fight scene, editing a viral TikTok, or performing with flames dancing around me, I bring the same level of precision, creativity, and raw energy to every project.
+                        </p>
+                        <div class="flex justify-center space-x-6 text-sm">
+                            <span class="bg-gray-800 px-3 py-1 rounded-full">🇷🇺 Russian</span>
+                            <span class="bg-gray-800 px-3 py-1 rounded-full">🇷🇴 Romanian</span>
+                            <span class="bg-gray-800 px-3 py-1 rounded-full">🇺🇸 English</span>
+                        </div>
+                    </div>
+                    <div class="section-fade">
+                        <div class="bg-gray-800 p-8 rounded-2xl hover-lift">
+                            <h3 class="font-display text-2xl font-semibold mb-4 fire-accent">Skills & Expertise</h3>
+                            <ul class="space-y-3 text-left">
+                                <li class="flex items-center"><i class="fas fa-fire text-orange-500 mr-3"></i> Fire Performance & Safety</li>
+                                <li class="flex items-center"><i class="fas fa-dancing text-orange-500 mr-3"></i> Contemporary & Street Dance</li>
+                                <li class="flex items-center"><i class="fas fa-video text-orange-500 mr-3"></i> Video Editing (CapCut Pro)</li>
+                                <li class="flex items-center"><i class="fas fa-fist-raised text-orange-500 mr-3"></i> Fight Choreography</li>
+                                <li class="flex items-center"><i class="fas fa-camera text-orange-500 mr-3"></i> On-Camera Performance</li>
+                                <li class="flex items-center"><i class="fas fa-magic text-orange-500 mr-3"></i> Acrobatics & Parkour</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showreel Section -->
+    <section id="showreel" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">Show<span class="fire-accent">reel</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="section-fade">
+                    <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg mb-2">Fire Show Performance</h3>
+                            <p class="text-gray-400">Epic nighttime fire performance with custom choreography and safety protocols.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-fade">
+                    <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg mb-2">Dance Performance Edit</h3>
+                            <p class="text-gray-400">Contemporary dance piece edited with dynamic cuts and color grading.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-fade">
+                    <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg mb-2">TikTok Style Edit</h3>
+                            <p class="text-gray-400">Fast-paced social media content with trending effects and transitions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">Photo <span class="fire-accent">Gallery</span></h2>
+            <div class="photo-gallery section-fade">
+                <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('https://images.unsplash.com/photo-1594736797933-d0301ba2fe65?w=800')">
+                    <img src="https://images.unsplash.com/photo-1594736797933-d0301ba2fe65?w=800" alt="Fire Performance" class="w-full h-full object-cover">
+                </div>
+                <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800')">
+                    <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800" alt="Dance Portrait" class="w-full h-full object-cover">
+                </div>
+                <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800')">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800" alt="Action Shot" class="w-full h-full object-cover">
+                </div>
+                <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800')">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800" alt="Studio Portrait" class="w-full h-full object-cover">
+                </div>
+                <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800')">
+                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800" alt="Behind the Scenes" class="w-full h-full object-cover">
+                </div>
+                <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=800')">
+                    <img src="https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=800" alt="Performance Art" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fight Scene Section -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">Fight Scene <span class="fire-accent">Choreography</span></h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="section-fade">
+                        <h3 class="font-display text-2xl font-semibold mb-6">Cinematic Combat Specialist</h3>
+                        <p class="text-lg leading-relaxed mb-6">
+                            With years of martial arts training and stunt work experience, I specialize in creating realistic, safe, and visually stunning fight sequences for film and digital content.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><i class="fas fa-shield-alt text-orange-500 mr-3"></i> Safety-first approach to all stunts</li>
+                            <li class="flex items-center"><i class="fas fa-film text-orange-500 mr-3"></i> Camera-aware choreography</li>
+                            <li class="flex items-center"><i class="fas fa-users text-orange-500 mr-3"></i> Actor coaching and coordination</li>
+                            <li class="flex items-center"><i class="fas fa-clock text-orange-500 mr-3"></i> Efficient rehearsal processes</li>
+                        </ul>
+                    </div>
+                    <div class="section-fade">
+                        <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="p-6">
+                                <h4 class="font-semibold text-lg mb-2">Fight Choreography Reel</h4>
+                                <p class="text-gray-400">Sample of choreographed fight scenes with various weapons and hand-to-hand combat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">My <span class="fire-accent">Services</span></h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-video text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="font-display text-xl font-semibold mb-4">Video Editing</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li>• TikTok & Instagram Reels</li>
+                        <li>• YouTube content editing</li>
+                        <li>• Music video production</li>
+                        <li>• Color grading & effects</li>
+                        <li>• Motion graphics</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <span class="text-2xl font-bold fire-accent">$50-200</span>
+                        <span class="text-gray-400">/project</span>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-user text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="font-display text-xl font-semibold mb-4">On-Camera Talent</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Acting & modeling</li>
+                        <li>• Dance performances</li>
+                        <li>• Fire shows & stunts</li>
+                        <li>• Commercial work</li>
+                        <li>• Social media content</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <span class="text-2xl font-bold fire-accent">$100-500</span>
+                        <span class="text-gray-400">/day</span>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-fist-raised text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="font-display text-xl font-semibold mb-4">Fight Choreography</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Cinematic fight scenes</li>
+                        <li>• Stunt coordination</li>
+                        <li>• Safety protocols</li>
+                        <li>• Actor training</li>
+                        <li>• Weapon choreography</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <span class="text-2xl font-bold fire-accent">$200-800</span>
+                        <span class="text-gray-400">/project</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-4xl font-bold mb-12 section-fade">Let's Create <span class="fire-accent">Together</span></h2>
+            <p class="text-xl mb-12 max-w-2xl mx-auto section-fade text-gray-300">
+                Ready to bring your vision to life? Whether you need dynamic editing, captivating performances, or expertly choreographed action sequences, let's make something extraordinary.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="section-fade">
+                    <a href="https://t.me/alexphoenix" target="_blank" class="block bg-gray-900 p-6 rounded-2xl hover-lift">
+                        <i class="fab fa-telegram text-3xl text-blue-400 mb-4"></i>
+                        <h3 class="font-semibold text-lg mb-2">Telegram</h3>
+                        <p class="text-gray-400">@alexphoenix</p>
+                    </a>
+                </div>
+                
+                <div class="section-fade">
+                    <a href="https://instagram.com/alexphoenix_" target="_blank" class="block bg-gray-900 p-6 rounded-2xl hover-lift">
+                        <i class="fab fa-instagram text-3xl text-pink-400 mb-4"></i>
+                        <h3 class="font-semibold text-lg mb-2">Instagram</h3>
+                        <p class="text-gray-400">@alexphoenix_</p>
+                    </a>
+                </div>
+                
+                <div class="section-fade">
+                    <a href="mailto:alex@phoenixcreative.com" class="block bg-gray-900 p-6 rounded-2xl hover-lift">
+                        <i class="fas fa-envelope text-3xl text-orange-400 mb-4"></i>
+                        <h3 class="font-semibold text-lg mb-2">Email</h3>
+                        <p class="text-gray-400">alex@phoenixcreative.com</p>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="section-fade">
+                <a href="https://t.me/alexphoenix" target="_blank" class="bg-gradient-to-r from-orange-500 to-red-600 px-12 py-4 rounded-full font-semibold text-lg hover:from-orange-600 hover:to-red-700 transition-all hover-lift inline-block">
+                    <i class="fas fa-fire mr-2"></i>
+                    Book Me Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <div class="font-display text-2xl font-bold fire-accent mb-4">Alex Phoenix</div>
+            <p class="text-gray-400 mb-6">Performer • Video Editor • Creative Artist</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://t.me/alexphoenix" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">
+                    <i class="fab fa-telegram text-xl"></i>
+                </a>
+                <a href="https://instagram.com/alexphoenix_" target="_blank" class="text-gray-400 hover:text-pink-400 transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="mailto:alex@phoenixcreative.com" class="text-gray-400 hover:text-orange-400 transition-colors">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+                <a href="https://youtube.com/@alexphoenix" target="_blank" class="text-gray-400 hover:text-red-400 transition-colors">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2024 Alex Phoenix. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with section-fade class
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.section-fade');
+            elements.forEach(el => observer.observe(el));
+        });
+
+        // Lightbox functionality
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // Escape key to close lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.hover-lift').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Fire effect animation for accent text
+        function addFireGlow() {
+            const fireElements = document.querySelectorAll('.fire-accent');
+            fireElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.filter = 'drop-shadow(0 0 10px rgba(255, 69, 0, 0.8))';
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    element.style.filter = 'none';
+                });
+            });
+        }
+
+        // Initialize fire glow effect
+        document.addEventListener('DOMContentLoaded', addFireGlow);
+
+        // Add floating animation to some elements
+        function addFloatingAnimation() {
+            const floatingElements = document.querySelectorAll('.animate-pulse');
+            floatingElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.5}s`;
+                element.style.animationDuration = `${2 + index * 0.5}s`;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', addFloatingAnimation);
+
+        // Performance optimization: Lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+</body>
+</html>
