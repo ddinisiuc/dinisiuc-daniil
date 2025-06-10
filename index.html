@@ -14,6 +14,8 @@
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.css">
     
     <style>
         body {
@@ -145,6 +147,13 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #ff6b35;
         }
+
+        .swiper-pagination-bullet {
+            background: linear-gradient(45deg, #ff4500, #ff6b35, #f7931e);
+        }
+        .services-swiper {
+            padding-bottom: 35px;
+        }
     </style>
 </head>
 <body class="bg-black text-white">
@@ -257,79 +266,106 @@
     <!-- Services Section -->
     <section id="services" class="py-20 bg-black">
         <div class="container mx-auto px-6">
-            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">Мои <span class="fire-accent">Услуги</span></h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-video text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="font-display text-xl font-semibold mb-4">Video Editing</h3>
+            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">
+                Мои <span class="fire-accent">Услуги</span>
+            </h2>
+
+            <!-- Swiper -->
+            <div class="swiper services-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="bg-gray-800 p-8 rounded-2xl section-fade h-full">
+                            <div class="text-center mb-6">
+                                <i class="fas fa-video text-4xl text-orange-500 mb-4"></i>
+                                <h3 class="font-display text-xl font-semibold mb-4">Video Editing</h3>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li>• TikTok & Instagram Reels</li>
+                                <li>• YouTube content editing</li>
+                                <li>• Music video production</li>
+                                <li>• Color grading & effects</li>
+                                <li>• Motion graphics</li>
+                            </ul>
+                            <div class="mt-6 text-center">
+                                <span class="text-2xl font-bold fire-accent">$50-200</span>
+                                <span class="text-gray-400">/project</span>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="space-y-2 text-sm">
-                        <li>• TikTok & Instagram Reels</li>
-                        <li>• YouTube content editing</li>
-                        <li>• Music video production</li>
-                        <li>• Color grading & effects</li>
-                        <li>• Motion graphics</li>
-                    </ul>
-                    <div class="mt-6 text-center">
-                        <span class="text-2xl font-bold fire-accent">$50-200</span>
-                        <span class="text-gray-400">/project</span>
+
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="bg-gray-800 p-8 rounded-2xl section-fade h-full">
+                            <div class="text-center mb-6">
+                                <i class="fas fa-user text-4xl text-orange-500 mb-4"></i>
+                                <h3 class="font-display text-xl font-semibold mb-4">On-Camera Talent</h3>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Acting & modeling</li>
+                                <li>• Dance performances</li>
+                                <li>• Fire shows & stunts</li>
+                                <li>• Commercial work</li>
+                                <li>• Social media content</li>
+                            </ul>
+                            <div class="mt-6 text-center">
+                                <span class="text-2xl font-bold fire-accent">$100-500</span>
+                                <span class="text-gray-400">/day</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="bg-gray-800 p-8 rounded-2xl section-fade h-full">
+                            <div class="text-center mb-6">
+                                <i class="fas fa-fist-raised text-4xl text-orange-500 mb-4"></i>
+                                <h3 class="font-display text-xl font-semibold mb-4">Fight Choreography</h3>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Cinematic fight scenes</li>
+                                <li>• Stunt coordination</li>
+                                <li>• Safety protocols</li>
+                                <li>• Actor training</li>
+                                <li>• Weapon choreography</li>
+                            </ul>
+                            <div class="mt-6 text-center">
+                                <span class="text-2xl font-bold fire-accent">$200-800</span>
+                                <span class="text-gray-400">/project</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <div class="bg-gray-800 p-8 rounded-2xl section-fade h-full">
+                            <div class="text-center mb-6">
+                                <i class="fas fa-code text-4xl text-orange-500 mb-4"></i>
+                                <h3 class="font-display text-xl font-semibold mb-4">Веб разработка</h3>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Лэндинг</li>
+                                <li>• Мультистраничный сайт</li>
+                                <li>• Интернет Магазин</li>
+                                <li>• Телеграмм Бот</li>
+                                <li>• Обновление и поддержка сайта</li>
+                            </ul>
+                            <div class="mt-6 text-center">
+                                <span class="text-2xl font-bold fire-accent">$200-800</span>
+                                <span class="text-gray-400">/project</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-user text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="font-display text-xl font-semibold mb-4">On-Camera Talent</h3>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li>• Acting & modeling</li>
-                        <li>• Dance performances</li>
-                        <li>• Fire shows & stunts</li>
-                        <li>• Commercial work</li>
-                        <li>• Social media content</li>
-                    </ul>
-                    <div class="mt-6 text-center">
-                        <span class="text-2xl font-bold fire-accent">$100-500</span>
-                        <span class="text-gray-400">/day</span>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Navigation &ndash;&gt;-->
+<!--                <div class="flex justify-center mt-8 gap-4">-->
+<!--                    <div class="swiper-button-prev text-orange-500"></div>-->
+<!--                    <div class="swiper-button-next text-orange-500"></div>-->
+<!--                </div>-->
 
-                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-fist-raised text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="font-display text-xl font-semibold mb-4">Fight Choreography</h3>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li>• Cinematic fight scenes</li>
-                        <li>• Stunt coordination</li>
-                        <li>• Safety protocols</li>
-                        <li>• Actor training</li>
-                        <li>• Weapon choreography</li>
-                    </ul>
-                    <div class="mt-6 text-center">
-                        <span class="text-2xl font-bold fire-accent">$200-800</span>
-                        <span class="text-gray-400">/project</span>
-                    </div>
-                </div>
-
-                <div class="bg-gray-800 p-8 rounded-2xl hover-lift section-fade">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-fist-raised text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="font-display text-xl font-semibold mb-4">Веб разработка</h3>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li>• Лэндинг</li>
-                        <li>• Мультистраничный сайт</li>
-                        <li>• Интернет Магазин</li>
-                        <li>• Телеграмм Бот</li>
-                        <li>• Обновление и поддержка твое сайта</li>
-                    </ul>
-                    <div class="mt-6 text-center">
-                        <span class="text-2xl font-bold fire-accent">$200-800</span>
-                        <span class="text-gray-400">/project</span>
-                    </div>
-                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination mt-6 text-white"></div>
             </div>
         </div>
     </section>
@@ -377,33 +413,47 @@
                 <div class="section-fade">
                     <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/tYaBMZapWK4" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-2">Fire Show Performance</h3>
-                            <p class="text-gray-400">Epic nighttime fire performance with custom choreography and safety protocols.</p>
+                            <h3 class="font-semibold text-lg mb-2">Видео-приглашение</h3>
+                            <p class="text-gray-400">В этом проекте я выступил сразу в нескольких ролях:
+                                💡 Автор идеи · 🎥 Оператор · 🕺 Артист · 💡 Осветитель · ✂️ Монтажёр
+                            </p>
+                            <p class="text-gray-400">
+                                Съёмка, свет, кадры и атмосфера — полностью на мне.
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="section-fade">
                     <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://youtube.com/embed/BQySLIdkcoU" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-2">Dance Performance Edit</h3>
-                            <p class="text-gray-400">Contemporary dance piece edited with dynamic cuts and color grading.</p>
+                            <h3 class="font-semibold text-lg mb-2">Caravan.md — Атмосфера дома на колёсах</h3>
+                            <p class="text-gray-400">
+                                Идея и монтаж — мой почерк, съёмка — за братом-партнёром.
+                                Фокус на естественном свете, плавной динамике и чистой картинке.
+                                Продумывал локации, кадры, ритм.
+                                Да, в кадре тоже я — автодом как стиль жизни изнутри.
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="section-fade">
                     <div class="bg-gray-900 rounded-2xl overflow-hidden hover-lift">
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://youtube.com/embed/uo3OeROafjY" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-2">TikTok Style Edit</h3>
-                            <p class="text-gray-400">Fast-paced social media content with trending effects and transitions.</p>
+                            <h3 class="font-semibold text-lg mb-2">Хореографическое видео</h3>
+                            <p class="text-gray-400">
+                                Короткое хореографическое видео для коллектива Voices.
+                                Идея, свет, съёмка, монтаж — всё от концепта до финального кадра.
+                                Цель — передать атмосферу физического театра и пригласить зрителя в мир движения и эмоций.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -414,7 +464,7 @@
     <!-- Photo Gallery Section -->
     <section id="gallery" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6">
-            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">Photo <span class="fire-accent">Галерея</span></h2>
+            <h2 class="font-display text-4xl font-bold text-center mb-12 section-fade">Фото <span class="fire-accent">Галерея</span></h2>
             <div class="photo-gallery section-fade">
                 <div class="photo-item rounded-2xl overflow-hidden bg-gray-800" onclick="openLightbox('assets/images/theatre1.jpg')">
                     <img src="assets/images/theatre1.jpg" alt="Fire Performance" class="w-full h-full object-cover">
@@ -647,5 +697,35 @@
             });
         }
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.js"></script>
+
+    <script>
+        const swiper = new Swiper('.services-swiper', {
+            loop: true,
+            spaceBetween: 30,
+            grabCursor: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
+
 </body>
 </html>
